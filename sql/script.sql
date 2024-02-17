@@ -303,6 +303,9 @@ create table verification_token
 
 INSERT INTO keyist.oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES ('test', 'resource-server-rest-api', '$2a$04$v8DNBoc36pw4c7b7Xyq/aeSpGneF9WciZUI9FibVz0neksUcPBXVS', 'read,write', 'password,authorization_code,refresh_token,implicit', null, 'USER', 10800, 2592000, null, null);
 INSERT INTO keyist.product_category (id, name) VALUES (1, 'Test');
+INSERT INTO keyist.product_category (id, name) VALUES (2, 'Test2');
+INSERT INTO keyist.product_category (id, name) VALUES (3, 'Test3');
+INSERT INTO keyist.product_category (id, name) VALUES (4, 'Test4');
 INSERT INTO keyist.color (id, name, hex) VALUES (1, 'red', '#ff144b');
 INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (1, 1, '000-0001', 'Test', 'test', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2018-05-18 09:50:48', '2020-10-22 01:55:43', 1);
 INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (2, 1, '000-0001', 'Test Product 2', 'http://test-product-2', 'Test Product 2: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ',   '2024-02-17 08:00:02', '2024-02-17 08:00:15', 1);
