@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-public class ProductController extends PublicApiController {
+public class ProductController extends ApiController {
 
     private final ProductService productService;
 
