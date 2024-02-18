@@ -36,22 +36,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests(requests -> requests
-                        .anyRequest().permitAll());
+                // .authorizeRequests(requests -> requests
+                // .anyRequest().permitAll());
 
-        // .cors().and()
-        // .csrf().disable()
-        // .authorizeRequests()
-        // .antMatchers(securityConstants.getWhitelist()).permitAll()
-        // .anyRequest().authenticated()
-        // .and()
-        // .sessionManagement()
-        // .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        // .and()
-        // .oauth2ResourceServer(oauth2 -> oauth2
-        // .opaqueToken(opaqueToken -> opaqueToken
-        // .introspector(introspector())
-        // )
-        // );
+                .cors().and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers(securityConstants.getWhitelist()).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .opaqueToken(opaqueToken -> opaqueToken
+                                .introspector(introspector())));
     }
 }
