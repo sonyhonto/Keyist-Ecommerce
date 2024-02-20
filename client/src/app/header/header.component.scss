@@ -139,13 +139,13 @@
 
         .cart-inside {
           padding: 0;
-          width: 20vw;
-          max-height: 400px;
+          width: 25vw;
+          max-height: 80vh; //400px;
           .list-group {
             .product {
               padding: 20px;
               padding-top: 0;
-              max-height: 25vh;
+              max-height: 75vh;
               overflow: hidden;
               overflow-y: scroll;
               border-bottom: 1px solid #e1e8ee;
