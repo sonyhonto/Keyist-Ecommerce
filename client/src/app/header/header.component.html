@@ -120,7 +120,7 @@
                   routerLink="/detail/{{cartItem.url}}">
                   <div class="col-md-4">
                     <div class="color" [ngStyle]="{'background-color': cartItem.color.hex}"></div>
-                    <img src="{{cartItem.thumb}}" alt="{{cartItem.name}}">
+                    <img src="{{cartItem.thumb}}" alt="{{cartItem.name}}" />
                   </div>
                   <div class="col-md-8 details">
                     <div class="row">
@@ -129,10 +129,10 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <p class="amount">Amount: <span>{{cartItem.amount}}</span></p>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <p class="price">{{cartItem.price}} €</p>
                       </div>
                     </div>
@@ -142,11 +142,13 @@
               </div>
 
               <div class="controls">
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row justify-content-center mt-3" >
+                  <div class="col-md-8">
                     <a routerLink="/cart" class="btn">Go to Cart</a>
                   </div>
-                  <div class="col-md-6">
+                </div>
+                <div class="row justify-content-around mt-3">
+                  <div class="col-md-8">
                     <button (click)="activatePurchase()" class="btn btn-info">Checkout</button>
                   </div>
                 </div>
