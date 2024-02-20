@@ -19,6 +19,13 @@
   .footer-left {
     width: 40%;
 
+    .footer-project {
+      a {}
+      a:hover {
+        text-decoration: none; 
+      }
+    }
+
     .footer-links {
       color: #ffffff;
       margin: 20px 0 12px;
