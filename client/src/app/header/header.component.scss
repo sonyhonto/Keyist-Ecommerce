@@ -16,6 +16,7 @@
     .pages {
       flex-grow: 1;
       .nav-link {
+        margin-left: 15%;
         &.active {
           color: #17a2b8;
         }
