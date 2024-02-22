@@ -55,7 +55,8 @@
         </a>
       </div>
 
-      <div class="user" *ngIf="(authState | async).authenticated">
+      <div class="row">
+      <div class="user col-2 offset-4" *ngIf="(authState | async).authenticated">
           <div ngbDropdown display="dynamic" placement="bottom" autoClose="true">
             <a class="nav-link" id="dropdownAccount" ngbDropdownToggle>
               <i class="fa fa-user"></i>
@@ -93,7 +94,7 @@
           </div>
       </div>
 
-      <div class="cart navbar-nav" *ngIf="(authState | async).authenticated">
+      <div class="cart navbar-nav col-2" *ngIf="(authState | async).authenticated">
         <div *ngFor="let e of (cartState | async).errors">
           <div *ngIf="e.errorEffect == 'FETCH_CART'">
             <div class="alert-danger">Error</div>
@@ -164,6 +165,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
 
   </nav>
