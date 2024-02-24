@@ -17,6 +17,15 @@
           </div>
         </div>
       </div>
+      <div class="sellers">
+        <p>Sellers</p>
+        <p *ngIf="selectedSeller !== 'any'" class="remove" (click)="clearSeller()">remove</p>
+        <div class="seller {{selectedSeller === s.seller.name ? 'active': ''}}"
+          *ngFor="let s of (browseState | async).sellers" (click)="selectSeller(s.seller.name)">
+          {{ s.seller.name }}        
+        </div>
+      </div>
+      
       <div class="price">
         <p>Price</p>
         <p *ngIf="minPrice !== '0' || maxPrice !== '0'" class="remove" (click)="clearPrice()">remove</p>

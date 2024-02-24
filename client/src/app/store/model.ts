@@ -71,6 +71,14 @@ export interface Colors {
   color: Color;
 }
 
+export interface Seller {
+  id: number;
+  name: string;
+  photo: string;
+  url: string;
+  socialUrl: string;
+}
+
 export interface CartItem {
   id: number;
   url: string;
