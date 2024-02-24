@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HousingServiceComponent } from './housing-service/housing-service.component';
 
 @NgModule({
   imports: [
@@ -11,7 +10,7 @@ import { HousingServiceComponent } from './housing-service/housing-service.compo
     RouterModule,
     NgbModule
   ],
-  declarations: [HeaderComponent, HousingServiceComponent],
+  declarations: [HeaderComponent],
   exports: [HeaderComponent]
 })
 export class HeaderModule {

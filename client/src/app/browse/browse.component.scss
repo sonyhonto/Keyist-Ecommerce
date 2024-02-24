@@ -36,8 +36,7 @@
 
     .sellers {
       margin-top: 25px;
-      // max-height: 20vh;
-      overflow-y: scroll;
+      max-height: 20vh;
       p {
         color: black;
         font-weight: bold;
@@ -48,18 +47,7 @@
           cursor: pointer;
         }
       }
-      .seller {
-        color: #292c2f;
-        cursor: pointer;
 
-        &.active {
-          color: #17a2b8;
-        }
-      }
-
-      .seller:hover {
-        color: #17a2b8;
-      }
     }
 
     .price {
