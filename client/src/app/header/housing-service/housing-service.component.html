@@ -1,1 +1,12 @@
-<p>housing-service works!</p>
+<section>
+    <p>housing-service works!</p>
+    <form>
+        <input type="text" placeholder="Filter by name" #filter>
+        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+    </form>
+</section>
+<section class="results">
+    <p *ngFor="let seller of filteredSellerList"
+    [seller]="seller">Name: {{seller.name}}
+    </p>
+</section>
