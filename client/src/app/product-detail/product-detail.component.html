@@ -53,13 +53,16 @@
 
 
         <div class="row">
-          <div class="variant-title col-md-4 {{activeTab === 0 ? 'active': ''}}" (click)="setActiveTab(0)">
+          <div class="variant-title col-md-3 {{activeTab === 0 ? 'active': ''}}" (click)="setActiveTab(0)">
             <p>Variants</p>
           </div>
-          <div class="product-detail-title col-md-4 {{activeTab === 1 ? 'active': ''}}" (click)="setActiveTab(1)">
+          <div class="product-detail-title col-md-3 {{activeTab === 1 ? 'active': ''}}" (click)="setActiveTab(1)">
             <p>Detail</p>
           </div>
-          <div class="delivery-title col-md-4 {{activeTab === 2 ? 'active': ''}}" (click)="setActiveTab(2)">
+          <div class="product-detail-title col-md-3 {{activeTab === 2 ? 'active': ''}}" (click)="setActiveTab(2)">
+            <p>Seller</p>
+          </div> 
+          <div class="delivery-title col-md-3 {{activeTab === 3 ? 'active': ''}}" (click)="setActiveTab(3)">
             <p>Delivery</p>
           </div>
         </div>
@@ -90,7 +93,26 @@
               <span>{{activeProductVariant.composition}}</span>
             </div>
           </div>
-          <div class="delivery-info col-md-12" *ngIf="activeTab === 2">
+          <div class="product-detail-info col-md-12" *ngIf="activeTab === 2">
+            <div>
+              <p>SELLER: </p>
+              <div class="color" [ngStyle]="{'background-color': activeProductVariant.color.hex}"></div>
+              <span>{{activeProductVariant.color.name.toLocaleUpperCase()}}</span>
+            </div>
+            <div>
+              <p>WIDTH:</p>
+              <span>{{activeProductVariant.width}}</span>
+            </div>
+            <div>
+              <p>HEIGHT:</p>
+              <span>{{activeProductVariant.height}}</span>
+            </div>
+            <div>
+              <p>COMPOSITION:</p>
+              <span>{{activeProductVariant.composition}}</span>
+            </div>
+          </div>
+          <div class="delivery-info col-md-12" *ngIf="activeTab === 3">
             <div>
               <p>CARGO PRICE:</p>
               <span>{{activeProductVariant.cargoPrice}} €</span>
