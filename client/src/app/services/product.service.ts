@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { config } from '../../config/local';
-import { ProductDetail, Product, ProductVariantResponse, Category, Colors } from '../store/model';
+import { ProductDetail, Product, ProductVariantResponse, Category, Colors, Seller } from '../store/model';
 
 @Injectable()
 export class ProductService {
@@ -9,6 +9,9 @@ export class ProductService {
   publicUrl = `${config.apiUrl}/api/public/product`;
   categoryUrl = `${config.apiUrl}/api/public/category`;
   colorUrl = `${config.apiUrl}/api/public/colors`;
+  // sellerUrl = `http://localhost:3000/sellers`;
+  sellerUrl = `${config.apiUrl}/api/public/sellers`;
+
 
   browsePageSize = 20;
   searchPageSize = 10;
@@ -108,6 +111,13 @@ export class ProductService {
 
   getColors() {
     return this.httpClient.get<Array<Colors>>(this.colorUrl);
+  }
+
+  getSellers() {
+    return this.httpClient.get<Array<Seller>>(this.sellerUrl, {
+      headers: {
+    }
+    });
   }
 
 }
