@@ -130,7 +130,8 @@ create table product
 (
     id           int auto_increment
         primary key,
-    category_id  int                                  null,
+    category_id  int,
+    seller_id int,                                  null,
     sku          varchar(50)                          not null,
     name         varchar(100)                         not null,
     url          varchar(100)                         not null,
@@ -139,7 +140,9 @@ create table product
     last_updated timestamp  default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     unlimited    tinyint(1) default 1                 null,
     constraint product_ibfk_1
-        foreign key (category_id) references product_category (id)
+        foreign key (category_id) references product_category (id),
+    constraint seller_id
+        foreign key (seller_id) references seller (id)
 );
 
 create index category_id
@@ -329,11 +332,11 @@ INSERT INTO keyist.color (id, name, hex) VALUES (2, 'pink', '#fa89b3');
 INSERT INTO keyist.color (id, name, hex) VALUES (3, 'purple', '#a64d79');
 INSERT INTO keyist.color (id, name, hex) VALUES (4, 'lime', '#aef359');
 INSERT INTO keyist.color (id, name, hex) VALUES (5, 'coffee', '#6f4e37'); 
-INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (1, 1, '000-0001', 'Test', 'test', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2018-05-18 09:50:48', '2020-10-22 01:55:43', 1);
-INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (2, 2, '000-0002', 'Test Product 2', 'test-product-2', 'Test Product 2: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 08:00:02', '2024-02-17 08:00:15', 1);
-INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (3, 3, '000-0003', 'Test Product 3', 'test-product-3', 'Test Product 3: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 08:00:04', '2024-02-17 08:00:25', 1);
-INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (4, 4, '000-0004', 'Test Product 4', 'test-product-4', 'Test Product 4: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 09:00:04', '2024-02-17 09:00:25', 1);
-INSERT INTO keyist.product (id, category_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES(5, 4, '000-0005', 'Test Product 5', 'test-product-5', 'Test Product 5: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 10:00:35', '2024-02-17 10:00:45', 1);
+INSERT INTO keyist.product (id, category_id, seller_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (1, 1, 1, '000-0001', 'Test', 'test', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2018-05-18 09:50:48', '2020-10-22 01:55:43', 1);
+INSERT INTO keyist.product (id, category_id, seller_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (2, 2, 1, '000-0002', 'Test Product 2', 'test-product-2', 'Test Product 2: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 08:00:02', '2024-02-17 08:00:15', 1);
+INSERT INTO keyist.product (id, category_id, seller_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (3, 3, 2, '000-0003', 'Test Product 3', 'test-product-3', 'Test Product 3: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 08:00:04', '2024-02-17 08:00:25', 1);
+INSERT INTO keyist.product (id, category_id, seller_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES (4, 4, 3, '000-0004', 'Test Product 4', 'test-product-4', 'Test Product 4: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 09:00:04', '2024-02-17 09:00:25', 1);
+INSERT INTO keyist.product (id, category_id, seller_id, sku, name, url, long_desc, date_created, last_updated, unlimited) VALUES(5, 4, 3, '000-0005', 'Test Product 5', 'test-product-5', 'Test Product 5: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s. ', '2024-02-17 10:00:35', '2024-02-17 10:00:45', 1);
 INSERT INTO keyist.product_variant (id, product_id, color_id, width, height, price, composition, cargo_price, tax_percent, sell_count, stock, live, image, thumb) VALUES (1, 1, 1, '4cm', '10cm', 9.99, 'Copper 70%, Zinc 30%', 5, 10, 6, 1000, 1, 'image-url-here', 'image-url-here');
 INSERT INTO keyist.product_variant (id, product_id, color_id, width, height, price, composition, cargo_price, tax_percent, sell_count, stock, live, image, thumb) VALUES (2, 2, 2, '5cm', '12cm', 1.99, 'Copper 10%, Zinc 20%', 1, 15, 8, 100, 1, 'image-url-here', 'image-url-here');
 INSERT INTO keyist.product_variant (id, product_id, color_id, width, height, price, composition, cargo_price, tax_percent, sell_count, stock, live, image, thumb) VALUES(3, 3, 3, '10cm', '2cm', 4.99, 'Paper 50%, Wool 20%', 10.0, 5, 10, 200, 1, 'image-url-here', 'image-url-here');
