@@ -1,4 +1,4 @@
-import { Category } from './../store/model';
+import { Category, Seller } from './../store/model';
 import { BrowseState } from './../store/browse/browse.reducer';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import * as BrowseActions from '../store/browse/browse.actions';
 import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { SellerService } from '../services/seller.service';
 
 
 @Component({
@@ -42,13 +43,18 @@ export class BrowseComponent implements OnInit, OnDestroy {
   selectedSort = 'any';
   selectedCategory = 'any';
   selectedColor = 'any';
+  selectedSeller = 'any';
   minPrice = '0';
   maxPrice = '0';
 
-  constructor(private store: Store<fromApp.AppState>) {
+  sellerList: Seller[] = [];
+
+  constructor(private store: Store<fromApp.AppState>, private sellerService: SellerService) {
   }
 
   ngOnInit() {
+    this.getSellers();
+
     this.browseState = this.store.select('browse');
     this.canFetchSubscription = this.browseState.subscribe(data => {
       this.canFetch = data.canFetch;
@@ -59,6 +65,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
       this.selectedSort = data.selectedSort;
       this.selectedCategory = data.selectedCategory;
       this.selectedColor = data.selectedColor;
+      this.selectedSeller = data.selectedSeller;
       this.minPrice = data.minPrice;
       this.maxPrice = data.maxPrice;
 
@@ -67,6 +74,10 @@ export class BrowseComponent implements OnInit, OnDestroy {
       }
       if (!data.colors || data.colors.length === 0) {
         this.store.dispatch(new BrowseActions.FetchColors());
+      }
+      // if (!data.sellers || data.sellers)
+      if (!data.sellers || data.sellers.length === 0) {
+        this.store.dispatch(new BrowseActions.FetchSellers());
       }
       if (data.products.length === 0) {
         this.getProducts();
@@ -134,20 +145,43 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.getProducts();
   }
 
+  selectSeller(seller: string) {
+    this.selectedSeller = seller;
+    this.getProducts();
+  }
+
+  clearSeller() {
+    this.selectedSeller = 'any';
+    this.getProducts();
+  }
+
 
   getProducts() {
     this.selectedPage = 0;
-    this.store.dispatch(new BrowseActions.FetchProducts({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, minPrice: this.minPrice, maxPrice: this.maxPrice }));
+    this.store.dispatch(new BrowseActions.FetchProducts({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, 
+      seller: this.selectedSeller, minPrice: this.minPrice, maxPrice: this.maxPrice }));
     this.getProductsCount();
     this.selectedPage++;
   }
 
   getProductsCount() {
-    this.store.dispatch(new BrowseActions.FetchProductsCount({ category: this.selectedCategory, color: this.selectedColor, minPrice: this.minPrice, maxPrice: this.maxPrice }));
+    this.store.dispatch(new BrowseActions.FetchProductsCount({ category: this.selectedCategory, color: this.selectedColor, 
+      seller: this.selectedSeller, minPrice: this.minPrice, maxPrice: this.maxPrice }));
   }
 
   getProductsAppend() {
-    this.store.dispatch(new BrowseActions.FetchProductsAppend({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, minPrice: this.minPrice, maxPrice: this.maxPrice }));
+    this.store.dispatch(new BrowseActions.FetchProductsAppend({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, 
+      seller: this.selectedSeller, minPrice: this.minPrice, maxPrice: this.maxPrice }));
     this.selectedPage++;
   }
+
+  getSellers(): void {
+    this.sellerService.getSellers()
+      .subscribe(sellers => this.sellerList = sellers);
+  }
+
+  // getSellers() {
+  //   this.store.dispatch(new BrowseActions.FetchSellers({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, 
+  //     seller: this.selectedSeller, minPrice: this.minPrice, maxPrice: this.maxPrice }));
+  // }
 }

@@ -47,6 +47,18 @@
           cursor: pointer;
         }
       }
+      .seller {
+        color: #292c2f;
+        cursor: pointer;
+
+        &.active {
+          color: #17a2b8;
+        }
+      }
+
+      .seller:hover {
+        color: #17a2b8;
+      }
 
     }
 

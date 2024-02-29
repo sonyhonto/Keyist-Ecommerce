@@ -1,10 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Seller } from '../store/model'; 
+import { config } from '../../config/local';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SellerService {
+
+    // sellerUrl = `${config.apiUrl}/api/public/sellers`;
+
+    // constructor(private httpClient: HttpClient) {}
+
+    // getSellers() {
+    //     return this.httpClient.get<Array<Seller>>(this.sellerUrl, {
+    //         headers: {}
+    //     });
+    // }
+
     readonly baseUrl = 'https://api.slingacademy.com/public/sample-photos';
 
     protected sellerList: Seller[] = [
@@ -44,6 +58,11 @@ export class SellerService {
             "socialUrl": "link-to-social"
         }
     ];
+
+    getSellers(): Observable<Seller[]> {
+        return of(this.sellerList);
+    }
+
 
     getAllSellers(): Seller[] {
         return this.sellerList;
