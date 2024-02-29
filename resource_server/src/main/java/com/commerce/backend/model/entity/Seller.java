@@ -13,13 +13,16 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-// @ToString(exclude = "user")
+@ToString(exclude = "productList")
 public class Seller {
     
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Product> productList;
 
     @Column(name = "name")
     private String name;

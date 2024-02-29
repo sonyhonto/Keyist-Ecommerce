@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"productCategory", "productVariantList"})
+@ToString(exclude = {"productCategory", "productVariantList", "seller"})
 public class Product {
 
     @Id
@@ -26,6 +26,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private ProductCategory productCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ProductVariant> productVariantList;
