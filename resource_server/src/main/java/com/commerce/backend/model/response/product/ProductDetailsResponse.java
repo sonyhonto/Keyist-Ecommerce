@@ -13,5 +13,6 @@ public class ProductDetailsResponse {
     private String sku;
     private String longDesc;
     private CategoryDTO category;
+    private String sellerName;
     private List<ProductVariantDetailDTO> productVariantDetails;
 }
