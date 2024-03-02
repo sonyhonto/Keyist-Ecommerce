@@ -1,4 +1,4 @@
-import { Category, Seller } from './../store/model';
+import { Category, Product, ProductDetail, Seller } from './../store/model';
 import { BrowseState } from './../store/browse/browse.reducer';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -48,12 +48,16 @@ export class BrowseComponent implements OnInit, OnDestroy {
   maxPrice = '0';
 
   sellerList: Seller[] = [];
+  // productsFake: Product[] = [];
+  productsFake: ProductDetail[] = [];
+
 
   constructor(private store: Store<fromApp.AppState>, private sellerService: SellerService) {
   }
 
   ngOnInit() {
     this.getSellers();
+    this.getProductsFake();
 
     this.browseState = this.store.select('browse');
     this.canFetchSubscription = this.browseState.subscribe(data => {
@@ -75,7 +79,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
       if (!data.colors || data.colors.length === 0) {
         this.store.dispatch(new BrowseActions.FetchColors());
       }
-      // if (!data.sellers || data.sellers)
       if (!data.sellers || data.sellers.length === 0) {
         this.store.dispatch(new BrowseActions.FetchSellers());
       }
@@ -178,6 +181,14 @@ export class BrowseComponent implements OnInit, OnDestroy {
   getSellers(): void {
     this.sellerService.getSellers()
       .subscribe(sellers => this.sellerList = sellers);
+  }
+
+  getProductsFake(): void {
+    this.sellerService.getProductsFake()
+      .subscribe(products => {
+        this.productsFake = products;
+        console.log("list: ", products);
+      });
   }
 
   // getSellers() {

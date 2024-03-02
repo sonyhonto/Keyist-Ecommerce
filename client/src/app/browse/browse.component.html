@@ -44,11 +44,19 @@
       </div>
       <div class="sellers">
         <p>Sellers</p>
-        <!-- <p *ngIf="selectedSeller !== 'any'" class="remove" (click)="clearSeller()">remove</p> -->
-        <!--<div class="seller {{selectedSeller === s.seller.name ? 'active': ''}}"
+        <p *ngIf="selectedSeller !== 'any'" class="remove" (click)="clearSeller()">remove</p>
+        <!-- <div class="seller {{selectedSeller === s.seller.name ? 'active': ''}}"
          *ngFor="let s of (browseState | async).sellers" (click)="selectSeller(s.seller.name)"> -->
         <div *ngFor="let seller of sellerList">
           Name: {{seller.name}}
+        </div>
+        <div *ngFor="let product of productsFake">
+          <ul>
+            <li>Product: {{product.name}}</li>
+            <li>Url: {{product.url}}</li>
+            <li>Seller Name: {{product.sellerName}}</li>
+            <li>Seller Url: {{product.sellerUrl}}</li>
+          </ul>
         </div>
       <app-housing-service></app-housing-service>
       </div>

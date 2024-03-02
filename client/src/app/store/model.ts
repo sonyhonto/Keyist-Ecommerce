@@ -58,6 +58,8 @@ export interface ProductDetail {
   cartDesc: string;
   longDesc: string;
   category: Category;
+  sellerName: string;
+  sellerUrl: string;
   productVariantDetails: Array<ProductVariantDetails>;
 }
 
