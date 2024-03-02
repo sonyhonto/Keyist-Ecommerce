@@ -95,12 +95,19 @@
           </div>
           <div class="seller-info col-md-12" *ngIf="activeTab === 2">
             <div>
-              <p>Seller Name: </p>
-              <span>{{product.sellerName}}</span>
+              <p>NAME:</p>
+              <span>{{product.seller.name}}</span>
             </div>
             <div>
-              <p>Seller Url: </p>
-              <span>{{product.sellerUrl}}</span>
+              <p>URL:</p>
+              <span>{{product.seller.url}}</span>
+            </div>
+            <div>
+              <p>SOCIAL URL:</p>
+              <span>{{product.seller.socialUrl}}</span>
+            </div>
+            <div>
+              <img class="responsive" src="{{product.seller.photoUrl}}" alt="{{product.seller.name}}">
             </div>
           </div>
           <div class="delivery-info col-md-12" *ngIf="activeTab === 3">

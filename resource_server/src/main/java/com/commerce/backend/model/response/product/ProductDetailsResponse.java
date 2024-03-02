@@ -2,6 +2,8 @@ package com.commerce.backend.model.response.product;
 
 import com.commerce.backend.model.dto.CategoryDTO;
 import com.commerce.backend.model.dto.ProductVariantDetailDTO;
+import com.commerce.backend.model.dto.SellerDTO;
+
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class ProductDetailsResponse {
     private String sku;
     private String longDesc;
     private CategoryDTO category;
+    private SellerDTO seller;
     private String sellerName;
     private String sellerUrl;
     private List<ProductVariantDetailDTO> productVariantDetails;

@@ -3,6 +3,7 @@ package com.commerce.backend.converter.product;
 import com.commerce.backend.model.dto.CategoryDTO;
 import com.commerce.backend.model.dto.ColorDTO;
 import com.commerce.backend.model.dto.ProductVariantDetailDTO;
+import com.commerce.backend.model.dto.SellerDTO;
 import com.commerce.backend.model.entity.Product;
 import com.commerce.backend.model.response.product.ProductDetailsResponse;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,13 @@ public class ProductDetailsResponseConverter implements Function<Product, Produc
         productDetailsResponse.setLongDesc(product.getLongDesc());
         productDetailsResponse.setSku(product.getSku());
         productDetailsResponse.setCategory(CategoryDTO.builder().name(product.getProductCategory().getName()).build());
+        productDetailsResponse.setSeller(SellerDTO.builder()
+                                .id(product.getSeller().getId())
+                                .name(product.getSeller().getName())
+                                .photoUrl(product.getSeller().getPhotoUrl())
+                                .url(product.getSeller().getUrl())
+                                .socialUrl(product.getSeller().getSocialUrl())
+                                .build());
         productDetailsResponse.setSellerName(product.getSeller().getName());
         productDetailsResponse.setSellerUrl(product.getSeller().getUrl());
         productDetailsResponse.setProductVariantDetails(

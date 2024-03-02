@@ -149,6 +149,15 @@
       }
     }
 
+    .seller-info {
+      img {
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+        border-radius: 8px;
+      }
+    }
+
     .delivery-info {
       div:not(:first-child) {
         span {
