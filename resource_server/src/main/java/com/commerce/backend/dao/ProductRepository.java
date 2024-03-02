@@ -2,6 +2,8 @@ package com.commerce.backend.dao;
 
 import com.commerce.backend.model.entity.Product;
 import com.commerce.backend.model.entity.ProductCategory;
+import com.commerce.backend.model.entity.Seller;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     Optional<Product> findByUrl(String url);
 
     List<Product> findAllByProductCategory(Pageable pageable, ProductCategory productCategory);
+
+    List<Product> findAllBySeller(Pageable pageable, Seller seller);
 
     List<Product> findTop8ByOrderByDateCreatedDesc();
 

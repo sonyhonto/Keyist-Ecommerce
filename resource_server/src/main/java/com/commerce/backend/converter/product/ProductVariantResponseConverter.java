@@ -16,6 +16,8 @@ public class ProductVariantResponseConverter implements Function<ProductVariant,
         productVariantResponse.setId(productVariant.getId());
         productVariantResponse.setName(productVariant.getProduct().getName());
         productVariantResponse.setUrl(productVariant.getProduct().getUrl());
+        productVariantResponse.setSellerName(productVariant.getProduct().getSeller().getName());
+        productVariantResponse.setSellerUrl(productVariant.getProduct().getSeller().getUrl());
         productVariantResponse.setProductVariant(ProductVariantDTO
                 .builder()
                 .id(productVariant.getId())
