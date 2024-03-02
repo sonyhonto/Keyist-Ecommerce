@@ -93,23 +93,14 @@
               <span>{{activeProductVariant.composition}}</span>
             </div>
           </div>
-          <div class="product-detail-info col-md-12" *ngIf="activeTab === 2">
+          <div class="seller-info col-md-12" *ngIf="activeTab === 2">
             <div>
-              <p>SELLER: </p>
-              <div class="color" [ngStyle]="{'background-color': activeProductVariant.color.hex}"></div>
-              <span>{{activeProductVariant.color.name.toLocaleUpperCase()}}</span>
+              <p>Seller Name: </p>
+              <span>{{product.sellerName}}</span>
             </div>
             <div>
-              <p>WIDTH:</p>
-              <span>{{activeProductVariant.width}}</span>
-            </div>
-            <div>
-              <p>HEIGHT:</p>
-              <span>{{activeProductVariant.height}}</span>
-            </div>
-            <div>
-              <p>COMPOSITION:</p>
-              <span>{{activeProductVariant.composition}}</span>
+              <p>Seller Url: </p>
+              <span>{{product.sellerUrl}}</span>
             </div>
           </div>
           <div class="delivery-info col-md-12" *ngIf="activeTab === 3">
