@@ -21,6 +21,7 @@ public class ProductDetailsResponseConverter implements Function<Product, Produc
         productDetailsResponse.setSku(product.getSku());
         productDetailsResponse.setCategory(CategoryDTO.builder().name(product.getProductCategory().getName()).build());
         productDetailsResponse.setSellerName(product.getSeller().getName());
+        productDetailsResponse.setSellerUrl(product.getSeller().getUrl());
         productDetailsResponse.setProductVariantDetails(
                 product.getProductVariantList()
                         .stream()

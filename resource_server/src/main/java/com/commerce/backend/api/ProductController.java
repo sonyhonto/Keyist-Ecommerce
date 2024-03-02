@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-public class ProductController extends ApiController {
+public class ProductController extends PublicApiController {
 
     private final ProductService productService;
 
@@ -45,6 +45,8 @@ public class ProductController extends ApiController {
         List<ProductVariantResponse> products = productService.getAll(page, pageSize, sort, category, minPrice, maxPrice, color);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    
 
     @GetMapping(value = "/product/count")
     public ResponseEntity<Long> getAllCount(@RequestParam(value = "category", required = false) String category,
