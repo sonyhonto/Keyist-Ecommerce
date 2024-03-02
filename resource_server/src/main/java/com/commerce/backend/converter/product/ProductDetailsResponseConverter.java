@@ -28,8 +28,6 @@ public class ProductDetailsResponseConverter implements Function<Product, Produc
                                 .url(product.getSeller().getUrl())
                                 .socialUrl(product.getSeller().getSocialUrl())
                                 .build());
-        productDetailsResponse.setSellerName(product.getSeller().getName());
-        productDetailsResponse.setSellerUrl(product.getSeller().getUrl());
         productDetailsResponse.setProductVariantDetails(
                 product.getProductVariantList()
                         .stream()
