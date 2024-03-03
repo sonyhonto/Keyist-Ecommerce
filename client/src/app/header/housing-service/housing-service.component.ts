@@ -1,6 +1,6 @@
 import { Component,inject , OnInit } from '@angular/core';
-import { Seller } from 'src/app/store/model';
-import { SellerService } from 'src/app/edit/seller.service'; 
+import { ProductDetail, Seller } from 'src/app/store/model';
+import { SellerService } from 'src/app/services/seller.service'; 
 import { ProductService } from 'src/app/services/product.service'; 
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class HousingServiceComponent implements OnInit {
 
+  productList: ProductDetail[] = [];
   sellerList: Seller[] = [];
   filteredSellerList: Seller[] = [];
 
@@ -19,16 +20,10 @@ export class HousingServiceComponent implements OnInit {
     private productService: ProductService) {
   }
 
-  // constructor(private productService: ProductService) {
-  // }
-
-
   ngOnInit(): void {
-    // this.sellerList = this.sellerService.getAllSellers();
-    // this.sellerList = this.productService.getSellers();
-
     this.getSellers();
-    this.filteredSellerList = this.sellerList;
+    // this.filteredSellerList = this.sellerList;
+    // console.log("filtered seller list", this.filteredSellerList);
   }
 
   filterResults(text: string) {
@@ -44,14 +39,16 @@ export class HousingServiceComponent implements OnInit {
 
   getSellers(): void {
     this.productService.getSellers()
-      .subscribe(sellers => this.sellerList = sellers);
+      .subscribe(sellers => {
+        this.sellerList = sellers;
+        this.filteredSellerList = sellers;
+      });
 
-      // .subscribe(sellers => this.sellerList = sellers.slice(1, 5));
-
-    // this.sellerService.getAllSellers();
-
-      // .map(sellers => this.sellerList = sellers.slice(1, 5));
-      
+    // this.sellerService.getProductsFake()
+    //   .subscribe(products => {
+    //     this.productList = products;
+    //     console.log("productList: ", products);
+    //   });
   }
 
 }
