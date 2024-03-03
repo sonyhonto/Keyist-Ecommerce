@@ -17,6 +17,9 @@ spring:
       minimum-idle: 2
       pool-name: data-source
     url: jdbc:mysql://localhost:3306/keyist?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    # url: jdbc:mysql://localhost:3307/keyist?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    # password: keyistpassword
+    # username: keyistuser
     password: password
     username: username
   jackson:
