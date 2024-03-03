@@ -1,0 +1,10 @@
+version: '3'
+services:
+
+  client:
+    image: 'keyist-client-com:latest'
+    build:
+      context: ./client
+    container_name: client
+    ports:
+      - '4200:80'
