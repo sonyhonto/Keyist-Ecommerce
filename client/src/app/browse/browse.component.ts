@@ -1,4 +1,4 @@
-import { Category, Product, ProductDetail, Seller } from './../store/model';
+import { Seller } from './../store/model';
 import { BrowseState } from './../store/browse/browse.reducer';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -48,16 +48,13 @@ export class BrowseComponent implements OnInit, OnDestroy {
   maxPrice = '0';
 
   sellerList: Seller[] = [];
-  // productsFake: Product[] = [];
-  productsFake: ProductDetail[] = [];
-
+  filteredSellerList: Seller[] = [];
 
   constructor(private store: Store<fromApp.AppState>, private sellerService: SellerService) {
   }
 
   ngOnInit() {
     this.getSellers();
-    this.getProductsFake();
 
     this.browseState = this.store.select('browse');
     this.canFetchSubscription = this.browseState.subscribe(data => {
@@ -65,6 +62,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
     });
 
     this.browseState.pipe(take(1)).subscribe(data => {
+      console.log("data : ", data);
       this.selectedPage = data.selectedPage;
       this.selectedSort = data.selectedSort;
       this.selectedCategory = data.selectedCategory;
@@ -151,11 +149,13 @@ export class BrowseComponent implements OnInit, OnDestroy {
   selectSeller(seller: string) {
     this.selectedSeller = seller;
     this.getProducts();
+    console.log("this selectedSeller: ", this.selectedSeller);
   }
 
   clearSeller() {
     this.selectedSeller = 'any';
     this.getProducts();
+    console.log("cleared seller : ", this.selectedSeller);
   }
 
 
@@ -180,19 +180,21 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
   getSellers(): void {
     this.sellerService.getSellers()
-      .subscribe(sellers => this.sellerList = sellers);
-  }
-
-  getProductsFake(): void {
-    this.sellerService.getProductsFake()
-      .subscribe(products => {
-        this.productsFake = products;
-        console.log("list: ", products);
+      .subscribe(sellers => {
+        this.sellerList = sellers;
+        this.filteredSellerList = sellers;
       });
   }
 
-  // getSellers() {
-  //   this.store.dispatch(new BrowseActions.FetchSellers({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, color: this.selectedColor, 
-  //     seller: this.selectedSeller, minPrice: this.minPrice, maxPrice: this.maxPrice }));
-  // }
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredSellerList = this.sellerList;
+      return;
+    }
+
+    this.filteredSellerList = this.sellerList.filter(
+      seller => seller?.name.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
 }

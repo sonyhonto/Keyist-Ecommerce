@@ -15,8 +15,8 @@ export class BrowseEffects {
       map((action: BrowseActions.FetchProducts) => {
         return action.payload;
       }),
-      switchMap((params: { page: number, sort: string, category: string, color: string, minPrice: string, maxPrice: string }) => {
-        return this.productService.getProducts(params.page, params.sort, params.category, params.color, params.minPrice, params.maxPrice)
+      switchMap((params: { page: number, sort: string, category: string, color: string, seller: string, minPrice: string, maxPrice: string }) => {
+        return this.productService.getProducts(params.page, params.sort, params.category, params.color, params.seller, params.minPrice, params.maxPrice)
           .pipe(map(res => {
             return {
               type: BrowseActions.FETCH_PRODUCTS_SUCCESS,
@@ -27,6 +27,7 @@ export class BrowseEffects {
                 selectedSort: params.sort,
                 selectedCategory: params.category,
                 selectedColor: params.color,
+                selectedSeller: params.seller,
                 minPrice: params.minPrice,
                 maxPrice: params.maxPrice
               }
@@ -41,8 +42,8 @@ export class BrowseEffects {
       map((action: BrowseActions.FetchProductsAppend) => {
         return action.payload;
       }),
-      mergeMap((params: { page: number, sort: string, category: string, color: string, minPrice: string, maxPrice: string }) => {
-        return this.productService.getProducts(params.page, params.sort, params.category, params.color, params.minPrice, params.maxPrice)
+      mergeMap((params: { page: number, sort: string, category: string, color: string, seller: string, minPrice: string, maxPrice: string }) => {
+        return this.productService.getProducts(params.page, params.sort, params.category, params.color, params.seller, params.minPrice, params.maxPrice)
           .pipe(map(res => {
             return {
               type: BrowseActions.FETCH_PRODUCTS_APPEND_SUCCESS,
@@ -53,6 +54,7 @@ export class BrowseEffects {
                 selectedSort: params.sort,
                 selectedCategory: params.category,
                 selectedColor: params.color,
+                selectedSeller: params.seller,
                 minPrice: params.minPrice,
                 maxPrice: params.maxPrice
               }
@@ -102,6 +104,17 @@ export class BrowseEffects {
           }), catchError(error => of(new BrowseActions.BrowseError({ error, errorEffect: BrowseActions.FETCH_COLORS }))));
       })
     );
+
+  @Effect()
+  fetchSeller = this.actions$
+      .pipe(ofType(BrowseActions.FETCH_SELLERS),
+        switchMap((action: BrowseActions.FetchSellers) => {
+          return this.productService.getSellers()
+            .pipe(map(res => {
+              return { type: BrowseActions.FETCH_SELLERS_SUCCESS, payload: {res, effect: BrowseActions.FETCH_SELLERS } };
+            }), catchError(error => of(new BrowseActions.BrowseError({ error, errorEffect:BrowseActions.FETCH_SELLERS }))));
+        })
+        );
 
   constructor(private actions$: Actions, private productService: ProductService) {
   }

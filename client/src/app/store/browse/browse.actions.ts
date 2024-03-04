@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { HttpError } from '../app.reducers';
-import { ProductVariantResponse, Category, Colors } from '../model';
+import { ProductVariantResponse, Category, Colors, Seller } from '../model';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
@@ -12,41 +12,59 @@ export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const FETCH_CATEGORY_SUCCESS = 'FETCH_CATEGORY_SUCCESS';
 export const FETCH_COLORS = 'FETCH_COLORS';
 export const FETCH_COLORS_SUCCESS = 'FETCH_COLORS_SUCCESS';
+export const FETCH_SELLERS = 'FETCH_SELLERS';
+export const FETCH_SELLERS_SUCCESS = 'FETCH_SELLERS_SUCCESS';
 export const BROWSE_ERROR = 'BROWSE_ERROR';
 
 
 export class FetchProducts implements Action {
   readonly type = FETCH_PRODUCTS;
 
-  constructor(public payload: { page: number, sort: string, category: string, color: string, minPrice: string, maxPrice: string }) {
+  constructor(public payload: { page: number, sort: string, category: string, 
+    color: string,
+    seller: string, 
+    minPrice: string, maxPrice: string }) {
   }
 }
 
 export class FetchProductsSuccess implements Action {
   readonly type = FETCH_PRODUCTS_SUCCESS;
 
-  constructor(public payload: { res: Array<ProductVariantResponse>, effect: string, selectedPage: number, selectedSort: string, selectedCategory: string, selectedColor: string, minPrice: string, maxPrice: string }) {
+  constructor(public payload: { res: Array<ProductVariantResponse>, 
+    effect: string, selectedPage: number, selectedSort: string, 
+    selectedCategory: string, selectedColor: string,
+    selectedSeller: string, 
+    minPrice: string, 
+    maxPrice: string }) {
   }
 }
 
 export class FetchProductsAppend implements Action {
   readonly type = FETCH_PRODUCTS_APPEND;
 
-  constructor(public payload: { page: number, sort: string, category: string, color: string, minPrice: string, maxPrice: string }) {
+  constructor(public payload: { page: number, sort: string, category: string, 
+    color: string, 
+    seller: string, 
+    minPrice: string, maxPrice: string }) {
   }
 }
 
 export class FetchProductAppendSuccess implements Action {
   readonly type = FETCH_PRODUCTS_APPEND_SUCCESS;
 
-  constructor(public payload: { res: Array<ProductVariantResponse>, effect: string, selectedPage: number, selectedSort: string, selectedCategory: string, selectedColor: string, minPrice: string, maxPrice: string }) {
+  constructor(public payload: { res: Array<ProductVariantResponse>, effect: string, selectedPage: number, 
+    selectedSort: string, selectedCategory: string, selectedColor: string, 
+    selectedSeller: string,
+    minPrice: string, maxPrice: string }) {
   }
 }
 
 export class FetchProductsCount implements Action {
   readonly type = FETCH_PRODUCTS_COUNT;
 
-  constructor(public payload: { category: string, color: string, minPrice: string, maxPrice: string }) {
+  constructor(public payload: { category: string, color: string, 
+    seller: string, 
+    minPrice: string, maxPrice: string }) {
   }
 }
 
@@ -80,6 +98,17 @@ export class FetchColorsSuccess implements Action {
   }
 }
 
+export class FetchSellers implements Action {
+  readonly type = FETCH_SELLERS;
+}
+
+export class FetchSellersSuccess implements Action {
+  readonly type = FETCH_SELLERS_SUCCESS;
+
+  constructor(public payload: { res: Array<Seller>, effect: string }) {
+  }
+}
+
 
 export class BrowseError implements Action {
   readonly type = BROWSE_ERROR;
@@ -93,4 +122,4 @@ export type BrowseActions = FetchProducts | FetchProductsSuccess |
   FetchProductsAppend | FetchProductAppendSuccess |
   FetchProductsCount | FetchProductsCountSuccess |
   FetchCategory | FetchCategorySuccess |
-  FetchColors | FetchColorsSuccess | BrowseError;
+  FetchColors | FetchColorsSuccess | FetchSellers | FetchSellersSuccess | BrowseError;

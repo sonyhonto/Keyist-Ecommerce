@@ -1,6 +1,6 @@
 import * as BrowseActions from './browse.actions';
 import { HttpError } from '../app.reducers';
-import { Category, Colors, ProductVariantResponse } from '../model';
+import { Category, Colors, Seller, ProductVariantResponse } from '../model';
 
 
 export interface BrowseState {
@@ -8,11 +8,13 @@ export interface BrowseState {
   productsCount: number;
   categories: Array<Category>;
   colors: Array<Colors>;
+  sellers: Array<Seller>;
   canFetch: boolean;
   selectedPage: number;
   selectedSort: string;
   selectedCategory: string;
   selectedColor: string;
+  selectedSeller: string;
   minPrice: string;
   maxPrice: string;
   errors: Array<HttpError>;
@@ -24,11 +26,13 @@ const initialState: BrowseState = {
   productsCount: 0,
   colors: null,
   categories: [],
+  sellers: [],
   canFetch: true,
   selectedPage: 0,
   selectedSort: 'any',
   selectedCategory: 'any',
   selectedColor: 'any',
+  selectedSeller: 'any',
   minPrice: '0',
   maxPrice: '0',
   errors: [],
@@ -51,6 +55,7 @@ export function browseReducer(state = initialState, action: BrowseActions.Browse
         selectedSort: action.payload.selectedSort,
         selectedCategory: action.payload.selectedCategory,
         selectedColor: action.payload.selectedColor,
+        selectedSeller: action.payload.selectedSeller,
         minPrice: action.payload.minPrice,
         maxPrice: action.payload.maxPrice,
         products: action.payload.res,
@@ -66,6 +71,7 @@ export function browseReducer(state = initialState, action: BrowseActions.Browse
         selectedSort: action.payload.selectedSort,
         selectedCategory: action.payload.selectedCategory,
         selectedColor: action.payload.selectedColor,
+        selectedSeller: action.payload.selectedSeller,
         minPrice: action.payload.minPrice,
         maxPrice: action.payload.maxPrice,
         products: [...state.products, ...action.payload.res],
@@ -92,6 +98,13 @@ export function browseReducer(state = initialState, action: BrowseActions.Browse
       return {
         ...state,
         colors: action.payload.res,
+        errors: [...state.errors.filter(error => error.errorEffect !== action.payload.effect)]
+      };
+
+    case (BrowseActions.FETCH_SELLERS_SUCCESS):
+      return {
+        ...state,
+        sellers: action.payload.res,
         errors: [...state.errors.filter(error => error.errorEffect !== action.payload.effect)]
       };
 
