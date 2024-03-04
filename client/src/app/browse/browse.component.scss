@@ -225,6 +225,33 @@
   }
 }
 
+.results {
+  margin-top: 25px;
+  max-height: 20vh;
+  overflow-y: scroll;
+  p {
+    color: black;
+    display: inline-block;
+    &.remove {
+      color: #17a2b8;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+  .seller {
+    color: #292c2f;
+    cursor: pointer;
+
+    &.active {
+      color: #17a2b8;
+    }
+  }
+
+  .seller:hover {
+    color: #17a2b8;
+  }
+}
+
 p {
   text-overflow: ellipsis;
   white-space: nowrap;

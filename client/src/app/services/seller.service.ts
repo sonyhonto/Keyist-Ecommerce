@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 export class SellerService {
 
     sellerUrl = `${config.apiUrl}/api/public/sellers`;
-
     productUrl = `${config.apiUrl}/api/public/product`;
 
     constructor(private httpClient: HttpClient) {}
@@ -20,12 +19,7 @@ export class SellerService {
         });
     }
 
-    // getProductsFake() {
-    //     let param: any = {'page': 1, 'size': 4};
-    //     return this.httpClient.get<Array<Product>>(this.productUrl, { params: param });
-    // }
-
-    getProductsFake() {
+    getProducts() {
         let param: any = {'page': 0, 'size': 4};
         return this.httpClient.get<Array<ProductDetail>>(this.productUrl, { params: param });
     }

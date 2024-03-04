@@ -9,7 +9,6 @@ export class ProductService {
   publicUrl = `${config.apiUrl}/api/public/product`;
   categoryUrl = `${config.apiUrl}/api/public/category`;
   colorUrl = `${config.apiUrl}/api/public/colors`;
-  // sellerUrl = `http://localhost:3000/sellers`;
   sellerUrl = `${config.apiUrl}/api/public/sellers`;
 
 
@@ -19,7 +18,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getProducts(page: number, sort: string, category: string, color: string, minPrice: string, maxPrice: string) {
+  getProducts(page: number, sort: string, category: string, color: string, seller: string, minPrice: string, maxPrice: string) {
     if (page === undefined && page === null && page < 0) {
       return;
     }
@@ -37,6 +36,10 @@ export class ProductService {
       params = params.set('color', color);
     }
 
+    if (seller && seller !== 'any') {
+      params = params.set('seller', seller);
+    }
+    
     if (minPrice && minPrice !== '0') {
       params = params.set('minPrice', minPrice);
     }

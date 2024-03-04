@@ -40,27 +40,23 @@
             (click)="selectColor(color.color.name)" class="{{selectedColor === color.color.name ? 'active' : ''}}">
           </div>
         </div>
-
       </div>
       <div class="sellers">
         <p>Sellers</p>
         <p *ngIf="selectedSeller !== 'any'" class="remove" (click)="clearSeller()">remove</p>
-        <!-- <div class="seller {{selectedSeller === s.seller.name ? 'active': ''}}"
-         *ngFor="let s of (browseState | async).sellers" (click)="selectSeller(s.seller.name)"> -->
-        <div *ngFor="let seller of sellerList">
-          Name: {{seller.name}}
-        </div>
-        <div *ngFor="let product of productsFake">
-          <ul>
-            <li>Product: {{product.name}}</li>
-            <li>Url: {{product.url}}</li>
-            <li>Seller Name: {{product.sellerName}}</li>
-            <li>Seller Url: {{product.sellerUrl}}</li>
-          </ul>
-        </div>
-      <app-housing-service></app-housing-service>
+        <section>
+            <form>
+                <input type="text" placeholder="Filter by name" #filter>
+                <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+            </form>
+        </section>
+        <section class="results">
+          <div *ngFor="let seller of filteredSellerList" (click)="selectSeller(seller.name)"
+          class="seller {{selectedSeller === seller.name ? 'active': ''}}" [seller]="seller">
+          {{seller.name}}
+          </div>
+        </section>
       </div>
-
     </div>
     <div class="browse-content col-md-9">
       <div *ngIf="(browseState | async).loading" class="loader"></div>
@@ -75,7 +71,6 @@
                 {{s.display}}</option>
             </select>
           </div>
-
 
           <div *ngFor="let e of (browseState | async).errors">
             <div *ngIf="e.errorEffect == 'FETCH_PRODUCTS' || e.errorEffect == 'FETCH_PRODUCTS_APPEND'"
