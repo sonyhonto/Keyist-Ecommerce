@@ -1,7 +1,6 @@
 package com.commerce.backend.model.response.product;
 
 import com.commerce.backend.model.dto.ProductVariantDTO;
-import com.commerce.backend.model.entity.Seller;
 
 import lombok.Data;
 
